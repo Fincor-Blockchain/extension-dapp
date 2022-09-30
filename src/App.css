@@ -1,0 +1,41 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    width: 100%;
+    flex-direction: column;
+    background-color: #f8f8fb;
+}
+
+@font-face {
+    font-family: "Gilroy-Regular";
+    font-display: "block";
+    src: local("Gilroy-Regular"), url("../src/assets/fonts/Gilroy-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gilroy-Light";
+    font-display: "block";
+    src: local("Gilroy-Light"), url("../src/assets/fonts/Gilroy-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gilroy-SemiBold";
+    font-display: "block";
+    src: local("Gilroy-SemiBold"), url("../src/assets/fonts/Gilroy-SemiBold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gilroy-Bold";
+    font-display: "block";
+    src: local("Gilroy-Bold"), url("../src/assets/fonts/Gilroy-Bold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gilroy-LightItalic";
+    font-display: "block";
+    src: local("Gilroy-LightItalic"),
+        url("../src/assets/fonts/Gilroy-LightItalic.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Gilroy-Medium";
+    font-display: "block";
+    src: local("Gilroy-Medium"), url("../src/assets/fonts/Gilroy-Medium.ttf") format("truetype");
+}

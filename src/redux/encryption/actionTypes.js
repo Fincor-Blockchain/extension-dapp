@@ -1,0 +1,4 @@
+export const ENCRYPTED_DATA = "ENCRYPTED_DATA";
+export const SET_ADDRESS = "SET_ADDRESS";
+export const SESSION_LOGOUT = "SESSION_LOGOUT";
+export const SET_PRIVATE_KEYS = "SET_PRIVATE_KEYS";

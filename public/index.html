@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <!--  fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Fincor</title>
+        <meta name="title" content="Blockchain powered by AI | Fincor" />
+        <meta
+            name="description"
+            content="Fincor is Artificial Intelligence controlled blockchain that solves previously known issues like high energy usage, scalability, centralization, accessibility, interoperability and security. It is a completely autonomous multi-layer blockchain that strives evenly well on both private and public blockchains."
+        />
+        <meta
+            name="keywords"
+            content="blockchain, explorer, blockchainexplorer,ai, artificial intelligence, interoperability, cross-chain payments, scalable, decentralized, secured by ai,high security, smart contract debugging,"
+        />
+        <meta property="og:title" content="Fincor Next Generation Of Blockchain" />
+        <meta property="og:site_name" content="Blockchain powered by AI | Fincor" />
+        <meta
+            property="og:description"
+            content="Fincor is Artificial Intelligence controlled blockchain that solves previously known issues like high energy usage, scalability, centralization, accessibility, interoperability and security. It is a completely autonomous multi-layer blockchain that strives evenly well on both private and public blockchains."
+        />
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+
+        <style>
+            .loading {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border: 2px solid rgba(100, 100, 100, 0.2);
+                border-radius: 50%;
+                border-top-color: #d5da43;
+                animation: spin 1s ease-in-out infinite;
+                -webkit-animation: spin 1s ease-in-out infinite;
+                left: calc(50% - 20px);
+                top: calc(50% - 20px);
+                position: fixed;
+                z-index: 1;
+            }
+
+            @keyframes spin {
+                to {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @-webkit-keyframes spin {
+                to {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+
+    <body style="overflow: hidden">
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root" style="overflow: hidden">
+            <div class="loading"></div>
+        </div>
+    </body>
+</html>
