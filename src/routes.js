@@ -1,38 +1,38 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import {
-    HashRouter,
-    Switch,
-    Route,
-    // Redirect,
-    // useHistory,
+  HashRouter,
+  Switch,
+  Route,
+  // Redirect,
+  // useHistory,
 } from "react-router-dom";
 import {
-    SplashScreen,
-    // CreateNewWallet,
-    // TermsAndCondition,
-    // Mnemonics,
-    // MnemonicsTypes,
-    Reciept,
-    // AddToken,
-    // AddCustomToken,
-    // Swap,
-    CreateAccount,
-    Setting,
-    // General,
-    // Advance,
-    // Contacts,
-    Security,
-    // Alert,
-    // AddAccount,
-    // Network,
-    // ImportAccount,
-    // Account,
-    // Welcome,
-    //   RestoreWallet,
-    //     Word24Mnemonics,
-    //     Word12Mnemonics,
-    // RestorePassword,
-    Transaction,
+  SplashScreen,
+  // CreateNewWallet,
+  // TermsAndCondition,
+  // Mnemonics,
+  // MnemonicsTypes,
+  Reciept,
+  // AddToken,
+  // AddCustomToken,
+  // Swap,
+  CreateAccount,
+  Setting,
+  // General,
+  // Advance,
+  // Contacts,
+  Security,
+  // Alert,
+  // AddAccount,
+  // Network,
+  // ImportAccount,
+  // Account,
+  // Welcome,
+  //   RestoreWallet,
+  //     Word24Mnemonics,
+  //     Word12Mnemonics,
+  // RestorePassword,
+  Transaction,
 } from "./screens";
 // import { AccessWallet } from "./screens/AccessWallet";
 // import { AddNetwork, NetworkDetail } from "./screens/setting/network";
@@ -49,7 +49,10 @@ import { setEncryptedData, setAddress } from "./redux/encryption/actions";
 import { UnlockRestoreWallet } from "./screens/auth/unlockRestore";
 import { activeIndex, setAccounts } from "./redux/wallet/actions";
 // import { getEnvironmentType } from "./utils/utils";
-
+import { Contacts } from "./screens/setting/contacts";
+import { AddContact } from "./screens/setting/contacts/addContacts";
+import { ViewContact } from "./screens/setting/contacts/viewContact";
+import { EditContact } from "./screens/setting/contacts/editContact";
 const AccessWallet = lazy(() => import("./screens/AccessWallet/AccessWallet"));
 const Account = lazy(() => import("./screens/account/Account"));
 const Auth = lazy(() => import("./screens/auth"));
@@ -188,81 +191,87 @@ const Transactions = lazy(() => import("./screens/transaction/transaction"));
 
 function noop() {}
 (() => {
-    if (process.env.NODE_ENV !== "development") {
-        console.log = noop;
-        console.warn = noop;
-        console.error = noop;
-    }
+  if (process.env.NODE_ENV !== "development") {
+    console.log = noop;
+    console.warn = noop;
+    console.error = noop;
+  }
 })();
+
 const AppRoutes = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    // // const history = useHistory();
-    // const [state, setstate] = useState(false);
-    // const { loggedIn } = useSelector((state) => state.auth);
-    // const confirmExit = (e) => {
-    //   dispatch(lockWalletHandler());
-    // };
+  // // const history = useHistory();
+  // const [state, setstate] = useState(false);
+  // const { loggedIn } = useSelector((state) => state.auth);
+  // const confirmExit = (e) => {
+  //   dispatch(lockWalletHandler());
+  // };
 
-    // useEffect(() => {
-    //   if (loggedIn) {
-    //     if (state == true) {
-    //       window.onbeforeunload = confirmExit();
-    //     } else {
-    //       setstate(true);
-    //     }
-    //   } else {
-    //     window.onbeforeunload = false;
-    //   }
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     if (state == true) {
+  //       window.onbeforeunload = confirmExit();
+  //     } else {
+  //       setstate(true);
+  //     }
+  //   } else {
+  //     window.onbeforeunload = false;
+  //   }
 
-    //   return () => {};
-    // }, [state]);
+  //   return () => {};
+  // }, [state]);
 
-    useEffect(() => {
-        if (ExtensionStore.isSupported) {
-            ExtensionStore.get().then((data) => {
-                const encryptedData = data?.encryptedData;
-                const address = data?.address;
-                const accounts = data?.accounts;
-                const activeItemIndex = data?.activeItemIndex;
-                if (data) {
-                    if (encryptedData) dispatch(setEncryptedData(encryptedData));
-                    if (address) dispatch(setAddress(address));
-                    if (accounts) dispatch(setAccounts(accounts));
-                    if (activeItemIndex) dispatch(activeIndex(activeItemIndex));
-                }
-            });
+  useEffect(() => {
+    if (ExtensionStore.isSupported) {
+      ExtensionStore.get().then((data) => {
+        const encryptedData = data?.encryptedData;
+        const address = data?.address;
+        const accounts = data?.accounts;
+        const activeItemIndex = data?.activeItemIndex;
+        if (data) {
+          if (encryptedData) dispatch(setEncryptedData(encryptedData));
+          if (address) dispatch(setAddress(address));
+          if (accounts) dispatch(setAccounts(accounts));
+          if (activeItemIndex) dispatch(activeIndex(activeItemIndex));
         }
-    }, [dispatch]);
+      });
+    }
+  }, [dispatch]);
 
-    return (
-        <HashRouter>
-            <Suspense fallback={<FullPageLoader isActive={true} />}>
-                <Switch>
-                    <Route exact path="/" component={SplashScreen} />
-                    {/* {loggedIn ? <SplashScreen /> : <SplashScreen />} */}
-                    {/* </Route> */}
-                    <Route path="/access-wallet" component={AccessWallet} />
-                    <Route path="/create-wallet" component={Auth} />
-                    <Route path="/unlock-wallet" component={UnlockWallet} />
-                    <Route path="/restore-wallet" component={RestoreWallet} />
-                    <Route path="/restore-phrase" component={UnlockRestoreWallet} />
-                    <Route path="/transaction" component={Transaction} />
-                    <Route path="/security&privacy" component={Security} />
-                    <Route path="/backupReveal" component={ConfirmSeedPhrase} />
-                    <Route path="/backupPassword" component={SeedPhrase} />
-                    <Route path="/create-account" component={CreateAccount} />
-                    <PrivateRoute path="/dashboard" component={Account} />
-                    <PrivateRoute path="/send" component={Reciept} />
-                    {/* <PrivateRoute path="/request" component={Request} /> */}
-                    {/* <PrivateRoute path="/import-my-wallet" component={ImportMyWallet} /> */}
-                    <PrivateRoute path="/setting" component={Setting} />
-                    <PrivateRoute exact path="/txs" component={Transactions} />
-                    {/* <Redirect to="/not-found" /> */}
-                </Switch>
-            </Suspense>
-        </HashRouter>
-    );
+  return (
+    <HashRouter>
+      <Suspense fallback={<FullPageLoader isActive={true} />}>
+        <Switch>
+          <Route exact path="/" component={SplashScreen} />
+          {/* {loggedIn ? <SplashScreen /> : <SplashScreen />} */}
+          {/* </Route> */}
+          <Route path="/access-wallet" component={AccessWallet} />
+          <Route path="/create-wallet" component={Auth} />
+          <Route path="/unlock-wallet" component={UnlockWallet} />
+          <Route path="/restore-wallet" component={RestoreWallet} />
+          <Route path="/restore-phrase" component={UnlockRestoreWallet} />
+          <Route path="/transaction" component={Transaction} />
+          <Route path="/security&privacy" component={Security} />
+          <Route path="/backupReveal" component={ConfirmSeedPhrase} />
+          <Route path="/backupPassword" component={SeedPhrase} />
+          <Route path="/create-account" component={CreateAccount} />
+          <PrivateRoute path="/dashboard" component={Account} />
+          <PrivateRoute path="/send" component={Reciept} />
+          {/* <PrivateRoute path="/request" component={Request} /> */}
+          {/* <PrivateRoute path="/import-my-wallet" component={ImportMyWallet} /> */}
+          <PrivateRoute path="/setting" component={Setting} />
+          <PrivateRoute exact path="/txs" component={Transactions} />
+          <PrivateRoute path="/add-contact" component={AddContact} />
+          <PrivateRoute path="/view-contact" component={ViewContact} />
+          <PrivateRoute path="/edit-contact" component={EditContact} />
+          <PrivateRoute exact path="/contacts" component={Contacts} />
+
+          {/* <Redirect to="/not-found" /> */}
+        </Switch>
+      </Suspense>
+    </HashRouter>
+  );
 };
 
 export default AppRoutes;

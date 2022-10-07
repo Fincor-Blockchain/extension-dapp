@@ -1,0 +1,2 @@
+// export const SET_CONTACTS = "SET_CONTACTS";
+// export const SET_ACTIVE_CONTACT = "SET_ACTIVE_CONTACT";
