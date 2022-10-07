@@ -48,9 +48,9 @@ class ExtensionStore {
    * @returns {Object} the key-value map from local storage
    */
   _get() {
-    const { local } = extension.storage;
+    const local = extension?.storage;
     return new Promise((resolve, reject) => {
-      local.get(null, (/** @type {any} */ result) => {
+      local?.local?.get(null, (/** @type {any} */ result) => {
         const err = checkForError();
         if (err) {
           reject(err);
@@ -68,9 +68,9 @@ class ExtensionStore {
    * @private
    */
   _set(obj) {
-    const { local } = extension.storage;
+    const local = extension?.storage;
     return new Promise((resolve, reject) => {
-      local.set(obj, () => {
+      local?.local.set(obj, () => {
         const err = checkForError();
         if (err) {
           reject(err);

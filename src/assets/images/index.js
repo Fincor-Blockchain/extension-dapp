@@ -29,3 +29,4 @@ export { default as FNR } from "./coinimages/fnr.png";
 export { default as logout1 } from "./log-img.png";
 export { default as check } from "./check.svg";
 export { default as userIcon } from "./user.svg";
+export { default as FINCOR } from "./FINCOR.png";

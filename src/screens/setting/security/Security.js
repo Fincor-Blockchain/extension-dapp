@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
     createWallet: {
         width: "100%",
-        maxWidth: 430,
+        maxWidth: 400,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
