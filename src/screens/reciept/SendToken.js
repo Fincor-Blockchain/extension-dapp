@@ -12,6 +12,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { SYMBOL_REGEX } from "../../vars/regex";
 import { denomToSymbol } from "../../utils/utils";
+import Summary from "./Summary";
 
 const useStyles = makeStyles((theme) => ({
   modalCentered: {
@@ -191,124 +192,140 @@ const SendToken = (props) => {
     hanldeSendCoin,
     hasAmountError,
     hasAmountZeroError,
+    isVerify,
+    setIsVerification,
+    sendCoinHanlder,
   } = props;
   const classes = useStyles();
 
   return (
     <Box className={classes.Wrapper}>
-      <Box className={classes.modalCentered}>
-        <Box
-          className={classes.dropDownContainer}
-          onClick={isOpen ? handleClose : null}
-        >
-          <Box className={classes.dropDownHeader} onClick={toggling}>
-            <Box className={classes.header}>
-              {(selectedOption && selectedOption.replace("f", "")) ||
-                "Select Token"}
-            </Box>
-            {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </Box>
-          {isOpen && (
-            <Box>
-              <Box className={classes.dropDownList}>
-                <Scrollbars>
-                  {coins.map((item) => (
-                    <Box
-                      className={classes.listItem}
-                      onClick={onOptionClicked(item.denom)}
-                      key={Math.random()}
-                    >
-                      {denomToSymbol(item.denom)}
-                    </Box>
-                  ))}
-                </Scrollbars>
-              </Box>
-            </Box>
-          )}
-        </Box>
-        <Box className={classes.inputText}>
-          <TextField
-            className={
-              state.touched.amount && errors.amount
-                ? classes.bRed
-                : classes.bGray
-            }
-            variant="outlined"
-            name="amount"
-            placeholder="Enter Amount"
-            fullWidth
-            onChange={inputChangeNumberHandler}
-            autoComplete="off"
-            value={state.amount}
-            type="number"
-            inputProps={{
-              min: 0,
-              step: "0.001",
-            }}
-            error={hasAmountError || hasAmountZeroError}
-            helperText={
-              hasAmountError
-                ? `You don't have enough ${
-                    selectCoin &&
-                    selectCoin.denom.replace(
-                      SYMBOL_REGEX,
-
-                      ""
-                    )
-                  } in your wallet.`
-                : hasAmountZeroError
-                ? `Please enter a correct amount
-                          `
-                : null
-            }
-          />
-        </Box>
-
-        <Box className={classes.inputText}>
-          <TextField
-            className={classes.bGray}
-            variant="outlined"
-            name="memo"
-            placeholder="Enter Memo"
-            fullWidth
-            onChange={handleChangeInput}
-            autoComplete="off"
-            value={state.memo}
-            type="text"
-          />
-        </Box>
-        <Box className={classes.feeStructure}>
-          <Typography className={classes.feeBox}>
-            Transaction Fee: 0.001 FNR
-          </Typography>
-        </Box>
-
-        <Box className={classes.btn}>
-          <Button className={classes.btn1} variant="outlined" onClick={goBack}>
-            Cancel
-          </Button>
-          <Button
-            className={classes.btn2}
-            onClick={hanldeSendCoin}
-            disabled={!selectedOption}
+      {isVerify ? (
+        <Summary
+          setIsVerification={setIsVerification}
+          state={state}
+          selectedOption={selectedOption}
+          sendCoinHanlder={sendCoinHanlder}
+        />
+      ) : (
+        <Box className={classes.modalCentered}>
+          <Box
+            className={classes.dropDownContainer}
+            onClick={isOpen ? handleClose : null}
           >
-            {isSending ? (
-              <CircularProgress
-                variant="indeterminate"
-                disableShrink
-                className={classes.top}
-                classes={{
-                  circle: classes.circle,
-                }}
-                size={20}
-                thickness={4}
-              />
-            ) : (
-              "Send"
+            <Box className={classes.dropDownHeader} onClick={toggling}>
+              <Box className={classes.header}>
+                {(selectedOption && selectedOption.replace("f", "")) ||
+                  "Select Coin"}
+              </Box>
+              {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </Box>
+            {isOpen && (
+              <Box>
+                <Box className={classes.dropDownList}>
+                  <Scrollbars>
+                    {coins.map((item) => (
+                      <Box
+                        className={classes.listItem}
+                        onClick={onOptionClicked(item.denom)}
+                        key={Math.random()}
+                      >
+                        {denomToSymbol(item.denom)}
+                      </Box>
+                    ))}
+                  </Scrollbars>
+                </Box>
+              </Box>
             )}
-          </Button>
+          </Box>
+          <Box className={classes.inputText}>
+            <TextField
+              className={
+                state.touched.amount && errors.amount
+                  ? classes.bRed
+                  : classes.bGray
+              }
+              variant="outlined"
+              name="amount"
+              placeholder="Enter Amount"
+              fullWidth
+              onChange={inputChangeNumberHandler}
+              autoComplete="off"
+              value={state.amount}
+              type="number"
+              inputProps={{
+                min: 0,
+                step: "0.001",
+              }}
+              error={hasAmountError || hasAmountZeroError}
+              helperText={
+                hasAmountError
+                  ? `You don't have enough ${
+                      selectCoin &&
+                      selectCoin.denom.replace(
+                        SYMBOL_REGEX,
+
+                        ""
+                      )
+                    } in your wallet.`
+                  : hasAmountZeroError
+                  ? `Please enter a correct amount
+                          `
+                  : null
+              }
+            />
+          </Box>
+
+          <Box className={classes.inputText}>
+            <TextField
+              className={classes.bGray}
+              variant="outlined"
+              name="memo"
+              placeholder="Enter Memo"
+              fullWidth
+              onChange={handleChangeInput}
+              autoComplete="off"
+              value={state.memo}
+              type="text"
+            />
+          </Box>
+          <Box className={classes.feeStructure}>
+            <Typography className={classes.feeBox}>
+              Transaction Fee: 0.001 FNR
+            </Typography>
+          </Box>
+
+          <Box className={classes.btn}>
+            <Button
+              className={classes.btn1}
+              variant="outlined"
+              onClick={goBack}
+            >
+              Cancel
+            </Button>
+            <Button
+              className={classes.btn2}
+              onClick={hanldeSendCoin}
+              disabled={!selectedOption}
+            >
+              {isSending ? (
+                <CircularProgress
+                  variant="indeterminate"
+                  disableShrink
+                  className={classes.top}
+                  classes={{
+                    circle: classes.circle,
+                  }}
+                  size={20}
+                  thickness={4}
+                />
+              ) : (
+                "Send"
+              )}
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      )}
     </Box>
   );
 };

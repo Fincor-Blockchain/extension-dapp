@@ -18,9 +18,7 @@ import {
   sendTransactionLoading,
   socketTerminateClient,
 } from "../../redux/wallet/actions";
-import { SuccessfullTxs, Password } from "../../components/modal";
-import fileEncryptionService from "../../services/fileEncryptionService";
-import Fincor from "../../services/fincor";
+import { SuccessfullTxs } from "../../components/modal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -217,11 +215,10 @@ const Reciept = () => {
     denom: "",
   });
 
-  const { coins, isSending, selectedCoin, activeAccounts } = useSelector(
+  const { coins, isSending, selectedCoin } = useSelector(
     (state) => state.wallet
   );
   const contacts = useSelector((state) => state.wallet.contacts);
-  const { encryptedData } = useSelector((state) => state.encrypt);
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -281,8 +278,6 @@ const Reciept = () => {
   // const validateAddress = () => {
   //   const { address } = state;
   //   const trimmedValue = address.trim();
-  //   console.log(state.address, "addresssssss");
-  //   console.log(Fincor.validateAddress(state.address).bech32);
 
   //   return Fincor.validateAddress(trimmedValue).bech32;
   // };
@@ -356,24 +351,6 @@ const Reciept = () => {
     }
   };
 
-  const passwordHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const key = fileEncryptionService.createEncryptionKey(password);
-      const decryptedDataJSON = fileEncryptionService.decryptData(
-        encryptedData,
-        key
-      );
-      const { mnemonic } = JSON.parse(decryptedDataJSON);
-      Fincor.setPath(`m/44'/118'/${activeAccounts[0].index}'/0/0`); //hd path for fincor
-      const ecpairPriv = Fincor.getECPairPriv(mnemonic);
-
-      setIsVerification(false);
-      sendCoinHanlder(ecpairPriv);
-    } catch (error) {
-      setPasswordError(true);
-    }
-  };
   const getContactDetail = (item) => {
     setState((state) => ({
       ...state,
@@ -420,41 +397,44 @@ const Reciept = () => {
           onClick={goBack}
         />
         <Box className={classes.main}>
-          <Typography variant="h1">Add Recipient</Typography>
-
-          <Box className={classes.form}>
-            <form onSubmit={handleSubmit}>
-              <Box
-                className={
-                  hasAddressError ? classes.bRed : classes.inputWrapper
-                }
-              >
-                <TextField
-                  variant="outlined"
-                  name="address"
-                  value={state.address || ""}
-                  placeholder="Search public address"
-                  fullWidth
-                  onChange={handleChangeInput}
-                  error={hasAddressError}
-                  helperText={
-                    hasAddressError ? "This address is invalid." : null
+          <Typography variant="h1">
+            {isVerify ? "Transaction Summary" : "Add Recipient"}
+          </Typography>
+          {isVerify ? null : (
+            <Box className={classes.form}>
+              <form onSubmit={handleSubmit}>
+                <Box
+                  className={
+                    hasAddressError ? classes.bRed : classes.inputWrapper
                   }
-                  disabled={state.isValid}
-                />
-                <SearchIcon
-                  className={classes.icon}
-                  fontSize="small"
-                  type="submit"
-                  onClick={handleSubmit}
-                />
-              </Box>
-            </form>
-            {/* <Box className={classes.qrWrapper}>
+                >
+                  <TextField
+                    variant="outlined"
+                    name="address"
+                    value={state.address || ""}
+                    placeholder="Enter public address"
+                    fullWidth
+                    onChange={handleChangeInput}
+                    error={hasAddressError}
+                    helperText={
+                      hasAddressError ? "This address is invalid." : null
+                    }
+                    disabled={state.isValid}
+                  />
+                  <SearchIcon
+                    className={classes.icon}
+                    fontSize="small"
+                    type="submit"
+                    onClick={handleSubmit}
+                  />
+                </Box>
+              </form>
+              {/* <Box className={classes.qrWrapper}>
                             <img src={qrIcon} alt="qr" />
                             <Typography className={classes.scan}>Scan Qr</Typography>
                         </Box> */}
-          </Box>
+            </Box>
+          )}
         </Box>
         {state.isValid ? (
           <SendToken
@@ -475,6 +455,12 @@ const Reciept = () => {
             hasAmountError={hasAmountError}
             hasAddressError={hasAddressError}
             hasAmountZeroError={hasAmountZeroError}
+            isVerify={isVerify}
+            password={password}
+            setIsVerification={setIsVerification}
+            hasPasswordError={hasPasswordError}
+            onChange={handleChange}
+            sendCoinHanlder={sendCoinHanlder}
           />
         ) : list?.length ? (
           <Scrollbars style={{ height: 300 }}>
@@ -513,15 +499,6 @@ const Reciept = () => {
           Need help? Contact{" "}
           <span className={classes.span}>Fincor wallet Support</span>
         </Typography>
-
-        <Password
-          isOpen={isVerify}
-          password={password}
-          setIsVerification={setIsVerification}
-          hasPasswordError={hasPasswordError}
-          onChange={handleChange}
-          passwordHandler={passwordHandler}
-        />
 
         <SuccessfullTxs isOpen={isModalOpen} txHash={state.txId} />
       </Container>
