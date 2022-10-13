@@ -119,11 +119,11 @@ const RestoreWallet = () => {
 
   const submitMnemonicPhraseHandler = async (e) => {
     e.preventDefault();
-    const mnemonicPhrase = `${word.one} ${word.two} ${word.three} ${word.four} ${word.five} ${word.six} ${word.seven} ${word.eight} ${word.nine} ${word.ten} ${word.eleven} ${word.twelve}`;
+    const mnemonicPhrase = `${word.one.trim()} ${word.two.trim()} ${word.three.trim()} ${word.four.trim()} ${word.five.trim()} ${word.six.trim()} ${word.seven.trim()} ${word.eight.trim()} ${word.nine.trim()} ${word.ten.trim()} ${word.eleven.trim()} ${word.twelve.trim()}`;
     const isValidate = cryptoService.validateMnemonic(mnemonicPhrase);
 
     if (isValidate) {
-      createWalletFile(mnemonicPhrase, state.values.password);
+      createWalletFile(mnemonicPhrase.trim(), state.values.password);
       setIsModalOpen(true);
     } else {
       setInvalidMnemonics(true);

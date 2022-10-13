@@ -119,13 +119,30 @@ const useStyles = makeStyles((theme) => ({
     color: "#d5da43",
     cursor: "pointer",
   },
+  href: {
+    width: "100%",
+    maxWidth: 287,
+    fontFamily: "Poppins",
+    fontSize: 15,
+    fontWeight: 500,
+    lineHheight: 2,
+    color: theme.palette.primary.darkGray,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    cursor: "pointer",
+    textAlign: "center",
+  },
+  linkColor: {
+    color: "#1f4bb1",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const SuccessTxs = (props) => {
-  const { isOpen, toggle } = props;
+  const { isOpen, toggle, txHash } = props;
   const history = useHistory();
   const classes = useStyles();
 
@@ -153,6 +170,19 @@ const SuccessTxs = (props) => {
                   Transaction sent successfully!
                 </Typography>
 
+                <Typography className={classes.key}>
+                  You can check your transaction at
+                </Typography>
+                <div className={classes.href}>
+                  <a
+                    href={`${process.env.REACT_APP_EXPLORER_URL}/txs/${txHash}`}
+                    target="_blank"
+                    className={classes.linkColor}
+                    rel="noreferrer"
+                  >
+                    {txHash}
+                  </a>
+                </div>
                 <Button onClick={Continue} className={classes.btn}>
                   Go Back
                 </Button>
