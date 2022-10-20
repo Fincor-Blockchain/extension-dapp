@@ -18,7 +18,7 @@ import {
   // Swap,
   CreateAccount,
   Setting,
-  // General,
+  General,
   // Advance,
   // Contacts,
   Security,
@@ -266,6 +266,7 @@ const AppRoutes = () => {
           <PrivateRoute path="/view-contact" component={ViewContact} />
           <PrivateRoute path="/edit-contact" component={EditContact} />
           <PrivateRoute exact path="/contacts" component={Contacts} />
+          <PrivateRoute exact path="/general" component={General} />
 
           {/* <Redirect to="/not-found" /> */}
         </Switch>

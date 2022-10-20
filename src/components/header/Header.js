@@ -26,6 +26,7 @@ import {
 import { Scrollbars } from "react-custom-scrollbars-2";
 import ExtensionStore from "../../utils/local-store";
 import { setAddress } from "../../redux/encryption/actions";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -135,6 +136,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = (props) => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const dispatch = useDispatch();
   const { pathname } = useHistory().location;
@@ -276,7 +278,7 @@ const Header = (props) => {
           <ListItemIcon>
             <Add />
           </ListItemIcon>
-          <ListItemText primary="Create Account" />
+          <ListItemText primary={t("header.CreateAccount")} />
         </MenuItem>
         <Scrollbars autoHeight autoHeightMin={40} autoHeightMax={135}>
           {accounts &&
@@ -306,7 +308,7 @@ const Header = (props) => {
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
-          <ListItemText primary="Settings" />
+          <ListItemText primary={t("header.Settings")} />
         </MenuItem>
         <MenuItem
           className={classes.textDecoration}
@@ -315,7 +317,7 @@ const Header = (props) => {
           <ListItemIcon>
             <img src={logout1} alt="head" width="18px" />
           </ListItemIcon>
-          <ListItemText primary="Log out" />
+          <ListItemText primary={t("header.Logout")} />
         </MenuItem>
       </Menu>
     </div>

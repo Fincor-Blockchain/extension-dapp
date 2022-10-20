@@ -13,6 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import ExtensionStore from "../../../../utils/local-store";
 import copy from "copy-to-clipboard";
 import { activeContacts } from "../../../../redux/contacts/actions";
+import { useTranslation } from "react-i18next";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "0 auto",
@@ -197,6 +198,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ViewContact = () => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -240,7 +242,7 @@ const ViewContact = () => {
           onClick={goBack}
         />
         <Box className={classes.main}>
-          <Typography variant="h1">Contact Detail</Typography>
+          <Typography variant="h1">{t("contact.contactDetail")}</Typography>
           <Box className={classes.editBody}>
             <Box className={classes.mainBox}>
               <img src={FINCOR} alt="fincor" className={classes.imgSend} />
@@ -261,7 +263,7 @@ const ViewContact = () => {
                   ref={moreRef}
                 >
                   <Typography variant="subtitle2" className={classes.title}>
-                    Address
+                    {t("contact.Address")}
                   </Typography>
 
                   <Typography
@@ -275,7 +277,7 @@ const ViewContact = () => {
             </Box>
             <Box className={classes.memoDetail}>
               <Typography variant="subtitle2" className={classes.title}>
-                Contact Description
+                {t("contact.ContactDescription")}
               </Typography>
               <Typography
                 className={classes.memoText}
@@ -287,7 +289,9 @@ const ViewContact = () => {
           </Box>
           <Box className={classes.btn}>
             <Link to="/edit-contact">
-              <Button className={classes.btn2}>Edit Contact</Button>
+              <Button className={classes.btn2}>
+                {t("contact.EditContact")}
+              </Button>
             </Link>
           </Box>
         </Box>

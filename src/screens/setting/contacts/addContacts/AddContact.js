@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@material-ui/core";
 import { allContacts } from "../../../../redux/contacts/actions";
 import ExtensionStore from "../../../../utils/local-store";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -187,16 +188,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const schema = {
-  address: {
-    presence: { allowEmpty: false, message: "is required" },
-  },
-  userName: {
-    presence: { allowEmpty: false, message: "is required" },
-  },
+const schema = (t) => {
+  return {
+    address: {
+      presence: { allowEmpty: false, message: t("contact.required") },
+    },
+    userName: {
+      presence: { allowEmpty: false, message: t("contact.required") },
+    },
+  };
 };
 
 const AddContact = () => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -229,7 +233,7 @@ const AddContact = () => {
       address: state.address,
       userName: state.userName,
     },
-    schema
+    schema(t)
   );
   errors = errors ? errors : {};
 
@@ -322,7 +326,7 @@ const AddContact = () => {
           onClick={goBack}
         />
         <Box className={classes.main}>
-          <Typography variant="h1">Add Contact</Typography>
+          <Typography variant="h1">{t("contact.add")}</Typography>
 
           <Box className={classes.form}>
             <Box
@@ -332,7 +336,7 @@ const AddContact = () => {
                 variant="outlined"
                 name="address"
                 value={state.address || ""}
-                placeholder="Enter public address"
+                placeholder={t("contact.enter_address")}
                 fullWidth
                 onChange={handleChangeInput}
                 error={
@@ -341,10 +345,12 @@ const AddContact = () => {
                 }
                 helperText={
                   hasAddressError
-                    ? "This address is invalid."
+                    ? t("contact.invalidAddress")
                     : state.touched.address &&
                       errors.address &&
                       errors.address[0]
+                    ? t("contact.addres_required")
+                    : null
                 }
                 disabled={state.isValid}
               />
@@ -359,8 +365,10 @@ const AddContact = () => {
                   state.touched.userName &&
                   errors.userName &&
                   errors.userName[0]
+                    ? t("contact.User_required")
+                    : null
                 }
-                placeholder="Enter Username"
+                placeholder={t("contact.enterName")}
                 fullWidth
                 onChange={handleChangeInput}
                 autoComplete="off"
@@ -387,14 +395,14 @@ const AddContact = () => {
               variant="outlined"
               onClick={goBack}
             >
-              Cancel
+              {t("contact.Cancel")}
             </Button>
             <Button
               className={classes.btn2}
               onClick={handleSubmit}
               // disabled={!selectedOption}
             >
-              Save
+              {t("contact.Save")}
             </Button>
           </Box>
         </Box>

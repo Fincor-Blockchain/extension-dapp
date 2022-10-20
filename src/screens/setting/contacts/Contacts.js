@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { activeContacts } from "../../../redux/contacts/actions";
 import ExtensionStore from "../../../utils/local-store";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Contacts = () => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -164,13 +166,13 @@ const Contacts = () => {
               onClick={goBack}
             />
             <Box className={classes.main}>
-              <Typography variant="h1">Contacts</Typography>
+              <Typography variant="h1">{t("setting.Contacts")}</Typography>
               <div
                 style={{ height: 350, width: "100%", maxWidth: "400px" }}
                 className={classes.listing}
               >
                 <Typography className={classes.help}>
-                  Build your own contact
+                  {t("contact.build_contact")}
                 </Typography>
 
                 <Scrollbars style={{ height: 300 }}>
@@ -201,7 +203,7 @@ const Contacts = () => {
                 </Scrollbars>
               </div>
               <Link to="/add-contact">
-                <Button onClick={addCCount}>Add contact</Button>
+                <Button onClick={addCCount}>{t("contact.add")}</Button>
               </Link>
             </Box>
           </Box>
@@ -214,15 +216,15 @@ const Contacts = () => {
               onClick={goBack}
             />
             <Box className={classes.main}>
-              <Typography variant="h1">Contacts</Typography>
+              <Typography variant="h1">{t("setting.Contacts")}</Typography>
               <Typography className={classes.help}>
-                Build your own contact
+                {t("contact.build_contact")}
               </Typography>
 
-              <NoData description="No contact list found" />
+              <NoData description={t("contact.no_contact")} />
               <Link to="/add-contact" className={classes.btnStyle}>
                 <Button onClick={addCCount} style={{ display: "inline-block" }}>
-                  Add contact
+                  {t("contact.add")}
                 </Button>
               </Link>
             </Box>

@@ -4,17 +4,17 @@
 // It will be used in future
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
-import { Box, Grid, Container, Typography } from "@material-ui/core";
+// import Divider from "@material-ui/core/Divider";
+import { Grid, Container, Typography } from "@material-ui/core";
 import Header from "../../../components/header/Header";
-import GeneralDropDownFirst from "./GeneralDropDownFirst";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import GeneralDropDownSecond from "./GeneralDropDownSecond";
+// import GeneralDropDownFirst from "./GeneralDropDownFirst";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import RadioGroup from "@material-ui/core/RadioGroup";
+// import Radio from "@material-ui/core/Radio";
+import LanguageDropDown from "./LanguageDropDown";
 import { back } from "../../../assets/images";
 import { useHistory } from "react-router-dom";
-import { MySwitch } from "../../../components/common";
+// import { MySwitch } from "../../../components/common";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,17 +106,17 @@ const useStyles = makeStyles((theme) => ({
 const General = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [state, setState] = React.useState({
-    checked: false,
-    checkedA: false,
-  });
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
-    });
-  };
+  // const [state, setState] = React.useState({
+  //   checked: false,
+  //   checkedA: false,
+  // });
+  // const handleChange = (e) => {
+  //   setState({
+  //     ...state,
+  //     [e.target.name]:
+  //       e.target.type === "checkbox" ? e.target.checked : e.target.value,
+  //   });
+  // };
 
   const goBack = () => {
     history.push("/setting");
@@ -135,7 +135,7 @@ const General = () => {
         <Grid container className={classes.main}>
           <Grid item xs={12} className={classes.createWallet}>
             <Typography variant="h1">General</Typography>
-            <Box className={classes.wrapper}>
+            {/* <Box className={classes.wrapper}>
               <Typography variant="subtitle1">Currency Conversion</Typography>
               <Typography className={classes.typo}>
                 Updated Thu May 27 2021 14:16:07 GMT+0500
@@ -143,8 +143,8 @@ const General = () => {
               </Typography>
             </Box>
             <GeneralDropDownFirst />
-            <Divider light={true} />
-            <Box className={classes.wrapper}>
+            <Divider light={true} /> */}
+            {/* <Box className={classes.wrapper}>
               <Typography variant="subtitle1">Primary Currency</Typography>
               <Typography className={classes.typo}>
                 Select native to prioritize displaying values in the native
@@ -170,16 +170,16 @@ const General = () => {
                   label="Fiats"
                 />
               </RadioGroup>
-            </Box>
+            </Box> */}
 
-            <Divider light={true} />
-            <Box className={classes.wrapper}>
+            {/* <Divider light={true} /> */}
+            {/* <Box className={classes.wrapper}>
               <Typography variant="subtitle1">Current Language</Typography>
               <Typography className={classes.typo}>English</Typography>
-            </Box>
-            <GeneralDropDownSecond />
-            <Divider light={true} />
-            <Box className={classes.wrapperSwitch}>
+            </Box> */}
+            <LanguageDropDown />
+            {/* <Divider light={true} /> */}
+            {/* <Box className={classes.wrapperSwitch}>
               <Typography className={classes.sub1} variant="subtitle1">
                 Use Blockies Identicon
               </Typography>
@@ -189,8 +189,8 @@ const General = () => {
                 onChange={handleChange}
               />
             </Box>
-            <Divider light={true} />
-            <Box className={classes.wrapperSwitch}>
+            <Divider light={true} /> */}
+            {/* <Box className={classes.wrapperSwitch}>
               <Typography className={classes.sub1} variant="subtitle1">
                 Hide token without balance
               </Typography>
@@ -199,7 +199,7 @@ const General = () => {
                 name="checkedA"
                 onChange={handleChange}
               />
-            </Box>
+            </Box> */}
           </Grid>
         </Grid>
       </Container>

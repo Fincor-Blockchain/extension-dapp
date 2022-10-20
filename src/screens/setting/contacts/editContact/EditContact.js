@@ -9,6 +9,7 @@ import { allContacts } from "../../../../redux/contacts/actions";
 import ExtensionStore from "../../../../utils/local-store";
 import { FINCOR } from "../../../../assets/images";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -217,6 +218,7 @@ const useStyles = makeStyles((theme) => ({
 // };
 
 const EditContact = () => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -336,7 +338,7 @@ const EditContact = () => {
           onClick={goBack}
         />
         <Box className={classes.main}>
-          <Typography variant="h1">Edit Contact</Typography>
+          <Typography variant="h1">{t("contact.EditContact")}</Typography>
           <Box className={classes.mainBox}>
             <img src={FINCOR} alt="fincor" className={classes.imgSend} />
           </Box>
@@ -347,7 +349,7 @@ const EditContact = () => {
                   className={classes.bGray}
                   variant="outlined"
                   name="userName"
-                  placeholder="Enter Username"
+                  placeholder={t("contact.enterName")}
                   fullWidth
                   onChange={handleChangeInput}
                   autoComplete="off"
@@ -364,12 +366,12 @@ const EditContact = () => {
                   variant="outlined"
                   name="address"
                   value={state.address || ""}
-                  placeholder="Enter public address"
+                  placeholder={t("contact.enter_address")}
                   fullWidth
                   onChange={handleChangeInput}
                   error={hasAddressError}
                   helperText={
-                    hasAddressError ? "This address is invalid." : null
+                    hasAddressError ? t("contact.invalidAddress") : null
                   }
                   disabled={state.isValid}
                 />
@@ -379,7 +381,7 @@ const EditContact = () => {
                   className={classes.bGray}
                   variant="outlined"
                   name="memo"
-                  placeholder="Enter Contact Description"
+                  placeholder={t("contact.contactDescription")}
                   fullWidth
                   onChange={handleChangeInput}
                   autoComplete="off"
@@ -395,10 +397,10 @@ const EditContact = () => {
               variant="outlined"
               onClick={deleteContact}
             >
-              Delete
+              {t("contact.Delete")}
             </Button>
             <Button className={classes.btn2} onClick={handleSubmit}>
-              Save
+              {t("contact.Save")}
             </Button>
           </Box>
         </Box>

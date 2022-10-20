@@ -9,7 +9,7 @@ import "./App.css";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
-
+import "./translator/i18n";
 const { store, persistor } = configureStore();
 
 ReactDOM.render(

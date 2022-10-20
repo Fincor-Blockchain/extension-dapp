@@ -1,0 +1,49 @@
+{
+  "setting": {
+    "title": "Idioma Actual",
+    "Contacts": "Contactos",
+    "manage": "Gestiona tu contacto",
+    "security": "Seguridad y privacidad"
+  },
+  "contact": {
+    "build_contact": "Construye tu propio contacto",
+    "Contacts": "Contactos",
+    "add": "Agregar contacto",
+    "no_contact": "No se encontró ninguna lista de contactos",
+    "enter_address": "Ingresar dirección pública",
+    "invalidAddress": "Esta dirección no es válida.",
+    "enterName": "Ingrese su nombre de usuario",
+    "Cancel": "Cancelar",
+    "Save": "Guardar",
+    "addres_required": "La dirección es necesaria",
+    "User_required": "Se requiere nombre de usuario",
+    "contactDetail": "Detalles de contacto",
+    "Address": "Dirección",
+    "ContactDescription": "Descripción del contacto",
+    "EditContact": "Editar contacto",
+    "Delete": "Borrar",
+    "contactDescription": "Ingrese la descripción del contacto"
+  },
+  "security": {
+    "revealPhrases": "Revelar frases semilla",
+    "clickphrases": "Haz clic para revelar tus frases",
+    "SecretRecoveryPhrase": "Frase de recuperación secreta",
+    "paragraph": "Si alguna vez cambia de navegador o de computadora, necesitará esta Frase secreta de recuperación para acceder a sus cuentas. Guárdelas en un lugar seguro y secreto.",
+    "enterPassowrd": "Ingresa tu contraseña",
+    "enterContinue": "Introduce tu contraseña para continuar",
+    "Invalidpassword": "Contraseña invalida",
+    "Next": "Próximo",
+    "text1": "¡NO compartas esta frase con nadie!",
+    "text2": "Estas palabras se pueden usar para robar todas sus cuentas.",
+    "CancelProcess": "Cancelar proceso",
+    "privateSecret": "Tu Frase de Recuperación Secreta privada",
+    "Copy": "Copiar",
+    "Close": "Cerca",
+    "Copied": "Copiado"
+  },
+  "header": {
+    "Settings": "Ajustes",
+    "Logout": "Cerrar sesión",
+    "CreateAccount": "Crea una cuenta"
+  }
+}

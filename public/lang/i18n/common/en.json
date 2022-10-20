@@ -1,0 +1,49 @@
+{
+  "setting": {
+    "title": "Current Language",
+    "Contacts": "Contacts",
+    "manage": "Manage your conatct",
+    "security": "Security and privacy"
+  },
+  "contact": {
+    "build_contact": "Build your own contact",
+    "Contacts": "Contacts",
+    "add": "Add contact",
+    "no_contact": "No contact list found",
+    "enter_address": "Enter public address",
+    "invalidAddress": "This address is invalid.",
+    "enterName": "Enter Username",
+    "Cancel": "Cancel",
+    "Save": "Save",
+    "addres_required": "Address is required",
+    "User_required": "User name is required",
+    "contactDetail": "Contact Detail",
+    "Address": "Address",
+    "ContactDescription": "Contact Description",
+    "EditContact": "Edit Contact",
+    "Delete": "Delete",
+    "contactDescription": "Enter Contact Description"
+  },
+  "security": {
+    "revealPhrases": "Reveal seed phrases",
+    "clickphrases": "click to reveal your phrases",
+    "SecretRecoveryPhrase": "Secret Recovery Phrase",
+    "paragraph": " If you ever change browsers or move computers, you will need this Secret Recovery Phrase to access your accounts. Save them somewhere safe and secret.",
+    "enterPassowrd": "Enter your password",
+    "enterContinue": "Enter your password to conitune",
+    "Invalidpassword": "Invalid password",
+    "Next": "Next",
+    "text1": "DO NOT share this phrase with anyone!",
+    "text2": "These words can be used to steal all your accounts.",
+    "CancelProcess": " Cancel Process",
+    "privateSecret": "Your private Secret Recovery Phrase",
+    "Copy": "Copy",
+    "Close": "Close",
+    "Copied": "Copied"
+  },
+  "header": {
+    "Settings": "Settings",
+    "Logout": "Log out",
+    "CreateAccount": "Create Account"
+  }
+}

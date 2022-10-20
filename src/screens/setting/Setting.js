@@ -6,6 +6,8 @@ import { Link, useHistory } from "react-router-dom";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { back } from "../../assets/images";
 
+import { useTranslation } from "react-i18next";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "0 auto",
@@ -77,61 +79,63 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const listData = [
-  // {
-  //     id: 1,
-  //     title: "General",
-  //     test1: "Currency Conversion",
-  //     test2: "Primary Currency",
-  //     test3: "Current Language",
-  //     test4: "Use Blockies Identicon",
-  //     test5: "Hide Tokens Without Balance",
-  //     // link: "/general",
-  // },
-  // {
-  //     id: 2,
-  //     title: "Advance",
-  //     test1: "State Logs",
-  //     test2: "Sync with mobile",
-  //     test3: "Reset Account",
-  //     test4: "Advanced gas controls",
-  //     test5: "Show Hex Data",
-  //     // link: "/advance",
-  // },
-  {
-    id: 3,
-    title: "Contacts",
-    // test1: "Add contact",
-    // test2: "Edit",
-    // test3: "Delete",
-    test4: "Manage your conatct",
-    link: "/contacts",
-  },
-  {
-    id: 4,
-    title: "Security and privacy",
-    test1: "Security and privacy",
-    link: "/security&privacy",
-  },
-  // {
-  //     id: 5,
-  //     title: "Alert",
-  //     test1: "Enable and disable each alert",
-  //     // link: "/alert",
-  // },
-  // {
-  //     id: 6,
-  //     title: "Network",
-  //     test1: "Add and edit personal RPC network",
-  //     // link: "/network",
-  // },
-];
 const Setting = (props) => {
+  const { t } = useTranslation(["common"]);
   const history = useHistory();
   const classes = useStyles();
   const goBack = () => {
     history.push("/dashboard");
   };
+  const listData = [
+    {
+      id: 1,
+      title: "General",
+      // test1: "Currency Conversion",
+      // test2: "Primary Currency",
+      test3: t("setting.title"),
+      // test4: "Use Blockies Identicon",
+      // test5: "Hide Tokens Without Balance",
+      link: "/general",
+    },
+    // {
+    //     id: 2,
+    //     title: "Advance",
+    //     test1: "State Logs",
+    //     test2: "Sync with mobile",
+    //     test3: "Reset Account",
+    //     test4: "Advanced gas controls",
+    //     test5: "Show Hex Data",
+    //     // link: "/advance",
+    // },
+    {
+      id: 3,
+      title: t("setting.Contacts"),
+      // test1: "Add contact",
+      // test2: "Edit",
+      // test3: "Delete",
+      test4: t("setting.manage"),
+      link: "/contacts",
+    },
+    {
+      id: 4,
+      title: t("setting.security"),
+      test1: t("setting.security"),
+      link: "/security&privacy",
+    },
+
+    // {
+    //     id: 5,
+    //     title: "Alert",
+    //     test1: "Enable and disable each alert",
+    //     // link: "/alert",
+    // },
+    // {
+    //     id: 6,
+    //     title: "Network",
+    //     test1: "Add and edit personal RPC network",
+    //     // link: "/network",
+    // },
+  ];
   return (
     <div className={classes.root}>
       <Container>
